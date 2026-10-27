@@ -916,7 +916,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
   </div>
   <div class="service-cards">
     <div class="service-card rv-s">
-      <div class="service-card-bg" style="background-image:url('./sisters_court.jpg');background-position:center 40%"></div>
+      <div class="service-card-bg" data-bg="./sisters_court.jpg" data-bg-pos="center 40%"></div>
       <div class="service-card-body">
         <div class="service-card-num">01</div>
         <span class="service-card-icon">🎾</span>
@@ -927,7 +927,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
       </div>
     </div>
     <div class="service-card rv-s2">
-      <div class="service-card-bg" style="background-image:url('./sae_court.jpg');background-position:center 35%"></div>
+      <div class="service-card-bg" data-bg="./sae_court.jpg" data-bg-pos="center 35%"></div>
       <div class="service-card-body">
         <div class="service-card-num">02</div>
         <span class="service-card-icon">📱</span>
@@ -938,7 +938,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
       </div>
     </div>
     <div class="service-card rv-s3">
-      <div class="service-card-bg" style="background-image:url('./tennis_play.jpg');background-position:center 30%"></div>
+      <div class="service-card-bg" data-bg="./tennis_play.jpg" data-bg-pos="center 30%"></div>
       <div class="service-card-body">
         <div class="service-card-num">03</div>
         <span class="service-card-icon">📈</span>
@@ -1088,7 +1088,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
 
     <div class="benefit-cards">
       <div class="benefit-card rv-s">
-        <div class="benefit-card-bg" style="background-image:url('./kanto_view.jpg');background-position:center 40%"></div>
+        <div class="benefit-card-bg" data-bg="./kanto_view.jpg" data-bg-pos="center 40%"></div>
         <div class="benefit-card-body">
           <div class="benefit-card-en">YouTube / Shorts / Reels</div>
           <div class="benefit-card-title">動画内ロゴ掲載</div>
@@ -1096,7 +1096,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
         </div>
       </div>
       <div class="benefit-card rv-s2">
-        <div class="benefit-card-bg" style="background-image:url('./festival.jpg');background-position:center 25%"></div>
+        <div class="benefit-card-bg" data-bg="./festival.jpg" data-bg-pos="center 25%"></div>
         <div class="benefit-card-body">
           <div class="benefit-card-en">Instagram / TikTok / X</div>
           <div class="benefit-card-title">SNS投稿・タグ付け</div>
@@ -1104,7 +1104,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
         </div>
       </div>
       <div class="benefit-card rv-s3">
-        <div class="benefit-card-bg" style="background-image:url('./kenya.jpg');background-position:center 30%"></div>
+        <div class="benefit-card-bg" data-bg="./kenya.jpg" data-bg-pos="center 30%"></div>
         <div class="benefit-card-body">
           <div class="benefit-card-en">Expedition / Tournament</div>
           <div class="benefit-card-title">遠征・大会レポート</div>
@@ -1308,6 +1308,26 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
 </footer>
 
 <script>
+/* ===================================================
+   CSS背景画像の遅延読み込み（window.loadをブロックしない）
+=================================================== */
+(function(){
+  var bgObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var bg = e.target.dataset.bg;
+        var pos = e.target.dataset.bgPos || 'center';
+        if(bg){
+          e.target.style.backgroundImage = "url('"+bg+"')";
+          e.target.style.backgroundPosition = pos;
+        }
+        bgObs.unobserve(e.target);
+      }
+    });
+  },{threshold:0, rootMargin:'200px'});
+  document.querySelectorAll('[data-bg]').forEach(function(el){ bgObs.observe(el); });
+})();
+
 /* ===================================================
    HEADER SCROLL
 =================================================== */
