@@ -1489,22 +1489,25 @@ document.querySelectorAll('[data-sns-count]').forEach(el => snsObs.observe(el));
     raf = requestAnimationFrame(loop);
   }
 
-  // Only run while hero is visible
-  const heroEl = document.getElementById('hero');
-  const heroObs = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) {
-      if (!raf) loop();
-    } else {
-      cancelAnimationFrame(raf);
-      raf = null;
-    }
-  }, {threshold: 0});
-  heroObs.observe(heroEl);
+  // loadイベント後に開始（ブラウザの読み込み中マークを止めるため）
+  window.addEventListener('load', () => {
+    resize();
+    init();
+
+    // ヒーローが見えているときだけ動作
+    const heroEl = document.getElementById('hero');
+    const heroObs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        if (!raf) loop();
+      } else {
+        cancelAnimationFrame(raf);
+        raf = null;
+      }
+    }, {threshold: 0});
+    heroObs.observe(heroEl);
+  });
 
   window.addEventListener('resize', () => { resize(); init(); }, {passive:true});
-  resize();
-  init();
-  loop();
 })();
 </script>
 </body>
