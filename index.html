@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>株式会社ブレイクワン | BreakOne</title>
+<meta name="description" content="株式会社ブレイクワンは、ジュニアスポーツ支援・SNS事業・コンサル事業の3軸で、ジュニア世代の可能性を広げます。">
+<meta property="og:title" content="株式会社ブレイクワン | BreakOne">
+<meta property="og:description" content="ジュニアアスリートの可能性を、企業の力で広げる。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="./hero1.jpeg">
+<meta property="og:site_name" content="株式会社ブレイクワン">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g:#15803d;--g2:#22c55e;--g3:#dcfce7;
+  --gold:#C5A028;--gold2:#E8BC3A;
+  --dark:#080e0a;--dark2:#0f1a14;--dark3:#162318;
+  --mid:#1e3328;
+  --white:#fff;--off:#f4f8f5;--gray:#6b7280;
+  --en:'Poppins',sans-serif;--ja:'Hiragino Sans','Noto Sans JP',sans-serif;
+  --max:1180px;--rad:16px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--ja);color:var(--dark);background:var(--dark);overflow-x:hidden}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:var(--g)}
+
+/* ========== CURSOR GLOW ========== */
+#cursor-glow{
+  position:fixed;width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(34,197,94,.07) 0%,transparent 65%);
+  pointer-events:none;transform:translate(-50%,-50%);
+  z-index:1;transition:left .12s ease,top .12s ease;
+  mix-blend-mode:screen;
+}
+
+/* ========== HEADER ========== */
+#hd{
+  position:fixed;top:0;left:0;width:100%;z-index:200;
+  padding:0 5%;height:80px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,14,10,0);
+  transition:background .5s,backdrop-filter .5s;
+}
+#hd.scrolled{background:rgba(8,14,10,.92);backdrop-filter:blur(16px)}
+.hd-logo{display:flex;align-items:center;text-decoration:none}
+.hd-logo img{height:44px;width:auto;object-fit:contain;filter:invert(1);opacity:.92}
+nav{display:flex;align-items:center;gap:36px}
+nav a{
+  font-family:var(--en);font-size:.72rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;
+  transition:color .2s;
+}
+nav a:hover{color:var(--white)}
+.nav-cta{
+  border:1px solid rgba(255,255,255,.4);color:var(--white)!important;
+  padding:10px 24px;border-radius:4px;
+  transition:background .2s,border-color .2s!important;
+}
+.nav-cta:hover{background:var(--white)!important;color:var(--dark)!important;border-color:var(--white)!important}
+.hd-menu{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.hd-menu span{display:block;width:22px;height:1.5px;background:var(--white);transition:.3s}
+#mob-nav{
+  display:none;position:fixed;top:80px;left:0;width:100%;
+  background:rgba(8,14,10,.96);backdrop-filter:blur(20px);
+  padding:28px 5%;z-index:199;flex-direction:column;gap:20px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+#mob-nav a{font-family:var(--en);font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.8);text-decoration:none}
+#mob-nav.open{display:flex}
+
+/* ========== HERO ========== */
+#hero{
+  position:relative;min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background-image:url('./hero1.jpeg');
+  background-size:cover;background-position:center 20%;
+  will-change:transform;
+}
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(160deg,rgba(8,14,10,.90) 0%,rgba(8,14,10,.65) 55%,rgba(8,14,10,.40) 100%);
+}
+/* canvas particles */
+#heroCanvas{
+  position:absolute;inset:0;z-index:1;
+  pointer-events:none;opacity:.7;
+}
+.hero-watermark{
+  position:absolute;right:-40px;bottom:-60px;z-index:1;pointer-events:none;
+}
+.hero-watermark img{
+  height:460px;width:auto;
+  filter:invert(1);opacity:.04;
+  user-select:none;
+}
+.hero-inner{
+  position:relative;z-index:2;
+  width:100%;max-width:var(--max);
+  padding:120px 5% 100px;
+  display:flex;flex-direction:column;align-items:flex-start;
+}
+.hero-logo{margin-bottom:56px}
+.hero-logo img{
+  height:80px;width:auto;object-fit:contain;
+  filter:invert(1);opacity:.97;
+}
+.hero-en{
+  font-family:var(--en);font-size:clamp(3.2rem,8vw,7.2rem);font-weight:900;
+  color:var(--white);line-height:.9;letter-spacing:-.03em;
+  overflow:hidden;
+}
+.hero-en span{display:block;transform:translateY(110%);transition:transform 1s cubic-bezier(.16,1,.3,1)}
+.hero-en span.in{transform:translateY(0)}
+.hero-ja{
+  font-size:clamp(1rem,2.5vw,1.5rem);color:rgba(255,255,255,.75);
+  line-height:1.7;margin-top:28px;margin-bottom:48px;font-weight:300;
+  transform:translateY(20px);opacity:0;transition:all .9s .65s cubic-bezier(.16,1,.3,1);
+}
+.hero-ja.in{transform:none;opacity:1}
+.hero-btns{
+  display:flex;flex-wrap:wrap;gap:16px;
+  transform:translateY(20px);opacity:0;transition:all .9s .85s cubic-bezier(.16,1,.3,1);
+}
+.hero-btns.in{transform:none;opacity:1}
+.btn-fill{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--g);color:var(--white);
+  font-family:var(--en);font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:16px 36px;border-radius:4px;text-decoration:none;
+  transition:background .25s,transform .25s,box-shadow .25s;
+  animation:float 3.5s ease-in-out 2s infinite;
+}
+.btn-fill:hover{background:#0f6632;transform:translateY(-3px)!important;box-shadow:0 12px 32px rgba(21,128,61,.4)}
+.btn-line{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid rgba(255,255,255,.4);color:var(--white);
+  font-family:var(--en);font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  padding:16px 36px;border-radius:4px;text-decoration:none;
+  transition:border-color .2s,transform .2s;
+}
+.btn-line:hover{border-color:var(--white);transform:translateY(-2px)}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-5px)}
+}
+.hero-scroll{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:var(--en);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);z-index:2;animation:bounce 2s infinite;
+}
+.hero-scroll::after{
+  content:'';display:block;width:1px;height:48px;
+  background:linear-gradient(to bottom,rgba(255,255,255,.4),transparent);
+}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* ========== MARQUEE ========== */
+.marquee-band{
+  background:var(--g);padding:16px 0;overflow:hidden;position:relative;
+}
+.marquee-inner{
+  display:flex;gap:0;white-space:nowrap;
+  animation:marquee 20s linear infinite;
+}
+.marquee-inner:hover{animation-play-state:paused}
+.marquee-inner span{
+  font-family:var(--en);font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--white);padding:0 40px;
+}
+.marquee-inner span.sep{color:rgba(255,255,255,.4);padding:0}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ========== SECTION BASE ========== */
+.sec{padding:120px 5%;position:relative}
+.sec-inner{max-width:var(--max);margin:0 auto}
+.sec-label{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--en);font-size:.68rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
+  margin-bottom:20px;
+}
+.sec-label::before{content:'';display:block;width:28px;height:1.5px}
+.sec-dark .sec-label{color:rgba(255,255,255,.5)}
+.sec-dark .sec-label::before{background:var(--g2)}
+.sec-dark h2{color:var(--white)}
+.sec-dark p{color:rgba(255,255,255,.65)}
+.sec-light .sec-label{color:var(--g)}
+.sec-light .sec-label::before{background:var(--g)}
+.sec-light h2{color:var(--dark)}
+.sec-light p{color:#444}
+h2.sec-title{
+  font-family:var(--en);font-size:clamp(2.4rem,5vw,4rem);font-weight:900;
+  line-height:1.05;letter-spacing:-.03em;margin-bottom:20px;
+}
+.sec-desc{font-size:clamp(.9rem,1.2vw,1.05rem);line-height:1.95;max-width:640px}
+
+/* ========== CONTACT + ABOUT ========== */
+#contact-about{
+  background:var(--dark);
+  border-top:1px solid rgba(255,255,255,.07);
+}
+.ca-grid{
+  display:block;max-width:760px;
+  margin-top:72px;
+}
+.ca-logo-block{margin-bottom:40px}
+.ca-logo-block img{
+  height:52px;width:auto;object-fit:contain;
+  filter:brightness(0) invert(1);opacity:.85;
+}
+.ca-name-en{
+  font-family:var(--en);font-size:clamp(1.6rem,2.4vw,2.2rem);font-weight:900;
+  color:var(--white);letter-spacing:-.02em;line-height:1.1;margin-bottom:4px;
+}
+.ca-name-ja{font-size:.85rem;color:rgba(255,255,255,.4);margin-bottom:4px}
+.ca-role{
+  font-family:var(--en);font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--g2);margin-bottom:28px;
+}
+.ca-message{
+  font-size:.88rem;color:rgba(255,255,255,.6);line-height:2;
+  margin-bottom:32px;padding:20px 24px;
+  border-left:2px solid var(--g);border-radius:0 6px 6px 0;
+  background:rgba(255,255,255,.03);
+  font-style:italic;
+}
+.ca-career{display:flex;flex-direction:column;gap:10px;margin-bottom:36px}
+.ca-career-item{display:flex;gap:14px;align-items:flex-start}
+.ca-career-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--g);
+  margin-top:8px;flex-shrink:0;
+}
+.ca-career-text{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.7}
+.ca-career-text strong{color:rgba(255,255,255,.8);font-weight:600}
+.ca-company-details{
+  border-top:1px solid rgba(255,255,255,.07);padding-top:28px;
+}
+.ca-detail-row{
+  display:flex;gap:16px;padding:10px 0;
+  border-bottom:1px solid rgba(255,255,255,.05);align-items:baseline;
+}
+.ca-detail-label{
+  font-family:var(--en);font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.28);min-width:100px;flex-shrink:0;
+}
+.ca-detail-value{font-size:.82rem;color:rgba(255,255,255,.6)}
+.ca-detail-value a{color:var(--g2);text-decoration:none}
+.ca-detail-value a:hover{text-decoration:underline}
+.ca-mail-btn{
+  display:inline-block;margin-top:36px;
+  background:var(--g);color:var(--white);text-decoration:none;
+  font-family:var(--en);font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:16px 40px;border-radius:8px;
+  transition:background .2s,transform .15s,box-shadow .2s;
+}
+.ca-mail-btn:hover{background:#0f6632;transform:translateY(-2px);box-shadow:0 10px 28px rgba(21,128,61,.35)}
+
+/* ========== SERVICES ========== */
+#services{background:var(--dark)}
+.services-intro{
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:80px;
+}
+.services-num{
+  font-family:var(--en);font-size:clamp(6rem,14vw,11rem);font-weight:900;
+  color:rgba(255,255,255,.04);line-height:1;letter-spacing:-.04em;
+  pointer-events:none;
+}
+.service-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.service-card{
+  position:relative;border-radius:14px;overflow:hidden;
+  height:480px;
+  /* stagger via --i */
+  transition:transform .6s cubic-bezier(.16,1,.3,1);
+}
+.service-card-bg{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  transition:transform .7s ease;
+  filter:brightness(.7);
+}
+.service-card:hover .service-card-bg{transform:scale(1.07);filter:brightness(.78)}
+.service-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(8,14,10,.95) 30%,rgba(8,14,10,.4) 65%,transparent 100%);
+}
+.service-card-body{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:32px 28px;z-index:1;
+}
+.service-card-num{
+  font-family:var(--en);font-size:.62rem;font-weight:700;letter-spacing:.24em;
+  color:var(--g2);margin-bottom:10px;
+}
+.service-card-icon{font-size:1.6rem;margin-bottom:12px;display:block}
+.service-card-en{
+  font-family:var(--en);font-size:1.4rem;font-weight:900;color:var(--white);
+  letter-spacing:-.01em;margin-bottom:4px;line-height:1.1;
+}
+.service-card-ja{
+  font-size:.78rem;font-weight:600;color:var(--g2);margin-bottom:14px;
+}
+.service-card-desc{
+  font-size:.78rem;color:rgba(255,255,255,.6);line-height:1.85;
+  max-height:0;overflow:hidden;
+  transition:max-height .5s cubic-bezier(.16,1,.3,1),opacity .4s ease;opacity:0;
+}
+.service-card:hover .service-card-desc{max-height:200px;opacity:1}
+.service-card-more{
+  display:inline-flex;align-items:center;gap:6px;margin-top:16px;
+  font-family:var(--en);font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);text-decoration:none;
+  transition:color .2s,gap .2s;
+}
+.service-card:hover .service-card-more{color:var(--g2);gap:10px}
+
+/* ========== CASE ========== */
+#case{background:var(--off)}
+.case-wrap{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:72px;
+  border-radius:var(--rad);overflow:hidden;
+  box-shadow:0 32px 80px rgba(0,0,0,.15);
+}
+.case-img{position:relative;aspect-ratio:4/5}
+.case-img img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.case-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to right,transparent 50%,var(--dark2));
+}
+.case-tag-wrap{position:absolute;top:24px;left:24px;z-index:1;display:flex;gap:8px}
+.tag{
+  background:var(--g);color:var(--white);
+  font-family:var(--en);font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:5px 14px;border-radius:2px;
+}
+.case-content{
+  background:var(--dark2);padding:60px 52px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.case-content-label{
+  font-family:var(--en);font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--g2);margin-bottom:20px;
+}
+.case-name{
+  font-family:var(--en);font-size:2.4rem;font-weight:900;color:var(--white);
+  letter-spacing:-.02em;line-height:1;margin-bottom:4px;
+}
+.case-name-ja{font-size:.88rem;color:rgba(255,255,255,.4);margin-bottom:24px}
+.case-desc{font-size:.84rem;color:rgba(255,255,255,.65);line-height:1.95;margin-bottom:36px}
+.case-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:36px}
+.case-stat{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;padding:18px 20px;
+}
+.case-stat-num{
+  font-family:var(--en);font-size:1.6rem;font-weight:900;color:var(--gold2);
+  line-height:1;margin-bottom:4px;
+}
+.case-stat-label{font-size:.72rem;color:rgba(255,255,255,.45);line-height:1.5}
+.case-quote{
+  font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.9;
+  padding-left:16px;border-left:2px solid var(--g);font-style:italic;
+  margin-bottom:40px;
+}
+/* case results block */
+.case-results{
+  margin-top:48px;
+  background:var(--dark2);
+  border-radius:16px;
+  padding:40px;
+}
+.case-results-label{
+  font-family:var(--en);font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--g2);margin-bottom:28px;
+  display:flex;align-items:center;gap:10px;
+}
+.case-results-label::after{
+  content:'';flex:1;height:1px;background:rgba(255,255,255,.1);
+}
+.case-results-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:rgba(255,255,255,.07);border-radius:12px;overflow:hidden;
+  margin-bottom:32px;
+}
+.case-result-item{
+  background:var(--dark3);padding:28px 20px;text-align:center;
+  transition:background .3s;
+}
+.case-result-item:hover{background:rgba(22,35,24,.8)}
+.case-result-num{
+  font-family:var(--en);font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:900;
+  color:var(--g2);line-height:1;margin-bottom:12px;
+}
+.case-result-detail{
+  font-size:.74rem;color:rgba(255,255,255,.65);line-height:1.6;font-weight:600;
+}
+.case-result-detail span{
+  font-size:.64rem;color:rgba(255,255,255,.35);display:block;margin-top:5px;font-weight:400;
+}
+/* media coverage */
+.case-media{
+  padding-top:28px;border-top:1px solid rgba(255,255,255,.08);
+}
+.case-media-label{
+  font-family:var(--en);font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin-bottom:16px;
+}
+.case-media-list{display:flex;flex-wrap:wrap;gap:12px}
+.case-media-link{
+  background:rgba(34,197,94,.12);
+  border:1.5px solid rgba(34,197,94,.5);
+  color:var(--white);font-size:.85rem;font-weight:600;
+  padding:12px 22px;border-radius:8px;text-decoration:none;
+  transition:all .22s;display:inline-flex;align-items:center;gap:8px;
+  box-shadow:0 0 12px rgba(34,197,94,.15);
+}
+.case-media-link::before{content:'↗';font-size:.8rem;color:var(--g2);flex-shrink:0}
+.case-media-link:hover{
+  background:rgba(34,197,94,.28);color:var(--white);
+  border-color:var(--g2);
+  box-shadow:0 0 20px rgba(34,197,94,.35);
+  transform:translateY(-2px);
+}
+/* ===== SNS REACH ===== */
+.case-sns{
+  margin-top:40px;
+  background:var(--dark2);
+  border-radius:16px;
+  padding:32px 36px 36px;
+}
+.case-sns-label{
+  font-family:var(--en);font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin-bottom:24px;display:block;
+}
+.case-sns-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.case-sns-item{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  border-radius:12px;padding:28px 20px 24px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;
+  transition:border-color .3s,transform .35s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+}
+.case-sns-item:hover{
+  border-color:rgba(255,255,255,.28);
+  transform:translateY(-6px);
+  box-shadow:0 16px 40px rgba(0,0,0,.3);
+}
+.case-sns-platform{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 16px;border-radius:7px;
+  font-family:var(--en);font-size:.78rem;font-weight:800;letter-spacing:.04em;
+}
+.case-sns-platform.yt{background:rgba(255,60,60,.18);color:#FF5050;border:1.5px solid rgba(255,60,60,.35)}
+.case-sns-platform.ig{background:rgba(225,48,108,.18);color:#EE5090;border:1.5px solid rgba(225,48,108,.35)}
+.case-sns-platform.tt{background:rgba(105,201,208,.18);color:#69C9D0;border:1.5px solid rgba(105,201,208,.35)}
+.case-sns-views{
+  font-family:var(--en);font-size:clamp(2.4rem,4vw,3.2rem);font-weight:900;
+  color:#fff;line-height:1;margin-top:4px;
+}
+.case-sns-views .unit{
+  font-size:1.1rem;font-weight:700;color:rgba(255,255,255,.7);
+  margin-left:4px;vertical-align:baseline;
+}
+.case-sns-sub{font-size:.7rem;color:rgba(255,255,255,.45);line-height:1.6}
+@media(max-width:640px){
+  .case-sns{padding:24px 20px 28px}
+  .case-sns-grid{grid-template-columns:1fr;gap:14px}
+}
+
+/* ========== PHOTO GRID ========== */
+#gallery{overflow:hidden;padding:0;position:relative}
+.gallery-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto;
+  gap:4px;height:520px;
+}
+.gallery-item{overflow:hidden;position:relative}
+.gallery-item img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .8s cubic-bezier(.16,1,.3,1);
+  transform:scale(1.05);
+}
+.gallery-item:hover img{transform:scale(1.12)}
+.gallery-item::after{
+  content:'';position:absolute;inset:0;
+  background:rgba(8,14,10,.25);transition:background .3s;
+}
+.gallery-item:hover::after{background:rgba(8,14,10,.05)}
+
+/* ========== SPONSOR BENEFIT ========== */
+#benefit{background:var(--dark2)}
+.benefit-lead-block{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;
+  align-items:start;margin-bottom:72px;
+}
+.benefit-lead-title{
+  font-family:var(--en);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;
+  color:var(--white);line-height:1.2;letter-spacing:-.02em;
+}
+.benefit-lead-title em{
+  display:block;font-style:normal;
+  font-size:.5em;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--g2);margin-bottom:12px;
+}
+.benefit-lead-right{display:flex;flex-direction:column;gap:20px;padding-top:8px}
+.benefit-lead-point{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:20px;border-radius:10px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
+  transition:border-color .3s,background .3s;
+}
+.benefit-lead-point:hover{
+  background:rgba(255,255,255,.06);border-color:rgba(34,197,94,.2);
+}
+.benefit-lead-point-icon{font-size:1.3rem;flex-shrink:0;margin-top:2px;}
+.benefit-lead-point-title{font-size:.88rem;font-weight:700;color:var(--white);margin-bottom:4px;}
+.benefit-lead-point-desc{font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.8}
+.benefit-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.benefit-card{
+  position:relative;border-radius:14px;overflow:hidden;
+  height:360px;cursor:pointer;
+}
+.benefit-card-bg{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  transition:transform .7s cubic-bezier(.16,1,.3,1);
+}
+.benefit-card:hover .benefit-card-bg{transform:scale(1.07)}
+.benefit-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(8,14,10,.92) 30%,rgba(8,14,10,.3) 70%,transparent 100%);
+}
+.benefit-card-body{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:24px 22px;z-index:1;
+}
+.benefit-card-en{
+  font-family:var(--en);font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--g2);margin-bottom:6px;
+}
+.benefit-card-title{font-size:.95rem;font-weight:700;color:var(--white);margin-bottom:8px;line-height:1.3;}
+.benefit-card-desc{font-size:.74rem;color:rgba(255,255,255,.5);line-height:1.75}
+.benefit-proof{
+  margin-top:48px;
+  border:1px solid rgba(197,160,40,.3);border-radius:14px;overflow:hidden;
+  display:grid;grid-template-columns:auto 1fr;align-items:center;
+  background:rgba(197,160,40,.04);
+  transition:border-color .3s;
+}
+.benefit-proof:hover{border-color:rgba(197,160,40,.5)}
+.benefit-proof-img{width:280px;flex-shrink:0}
+.benefit-proof-img img{display:block;width:100%;height:auto;object-fit:cover}
+.benefit-proof-copy{padding:32px 36px}
+.benefit-proof-badge{
+  display:inline-block;
+  background:var(--gold);color:var(--dark);
+  font-family:var(--en);font-size:.6rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:4px 12px;border-radius:2px;margin-bottom:14px;
+}
+.benefit-proof-title{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:8px;line-height:1.5;}
+.benefit-proof-desc{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.8}
+
+/* ========== PLANS ========== */
+#plans{background:var(--dark2)}
+.plans-intro{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:72px;gap:40px;flex-wrap:wrap;
+}
+.plans-intro .sec-desc{max-width:480px}
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.plan{
+  border:1px solid rgba(255,255,255,.1);border-radius:var(--rad);
+  padding:44px 36px;position:relative;overflow:hidden;
+  background:rgba(255,255,255,.03);
+  transition:border-color .35s,transform .45s cubic-bezier(.16,1,.3,1),box-shadow .35s;
+}
+.plan:hover{
+  border-color:rgba(255,255,255,.25);
+  transform:translateY(-8px);
+  box-shadow:0 24px 60px rgba(0,0,0,.35);
+}
+.plan.featured{border-color:var(--g);background:var(--mid);}
+.plan.featured:hover{box-shadow:0 24px 60px rgba(21,128,61,.25)}
+.plan.featured::before{
+  content:'POPULAR';position:absolute;top:24px;right:24px;
+  background:var(--g);color:var(--white);
+  font-family:var(--en);font-size:.6rem;font-weight:700;letter-spacing:.14em;
+  padding:4px 10px;border-radius:2px;
+}
+.plan-label{font-family:var(--en);font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:24px;}
+.plan-name{font-family:var(--en);font-size:1.6rem;font-weight:900;color:var(--white);margin-bottom:4px;letter-spacing:-.01em;}
+.plan.featured .plan-name{color:var(--gold2)}
+.plan-name-ja{font-size:.78rem;color:rgba(255,255,255,.35);margin-bottom:32px}
+.plan-price{font-family:var(--en);font-size:clamp(2rem,3vw,2.8rem);font-weight:900;color:var(--white);line-height:1;margin-bottom:4px;}
+.plan.featured .plan-price{color:var(--gold2)}
+.plan-price-note{font-size:.72rem;color:rgba(255,255,255,.35);margin-bottom:36px}
+.plan-divider{height:1px;background:rgba(255,255,255,.08);margin-bottom:28px}
+.plan-list{list-style:none;margin-bottom:36px}
+.plan-list li{
+  font-size:.82rem;color:rgba(255,255,255,.6);
+  padding:9px 0;display:flex;align-items:flex-start;gap:10px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.plan-list li::before{content:'→';color:var(--g2);font-family:var(--en);flex-shrink:0}
+.plan.featured .plan-list li{color:rgba(255,255,255,.8)}
+.plan-btn{
+  display:block;text-align:center;
+  border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);
+  font-family:var(--en);font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:14px;border-radius:6px;text-decoration:none;
+  transition:all .25s;
+}
+.plan-btn:hover{background:rgba(255,255,255,.08);color:var(--white);border-color:rgba(255,255,255,.4)}
+.plan.featured .plan-btn{background:var(--g);border-color:var(--g);color:var(--white)}
+.plan.featured .plan-btn:hover{background:#0f6632}
+.plans-note{text-align:center;margin-top:40px;font-size:.8rem;color:rgba(255,255,255,.3);line-height:1.9;}
+
+/* ========== PROOF ========== */
+#proof{background:var(--dark)}
+.proof-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:rgba(255,255,255,.06);border-radius:var(--rad);overflow:hidden;
+  margin-top:64px;
+}
+.proof-item{
+  background:var(--dark2);padding:44px 32px;text-align:center;
+  transition:background .3s;
+}
+.proof-item:hover{background:var(--dark3)}
+.proof-num{
+  font-family:var(--en);font-size:clamp(2.4rem,4vw,3.2rem);font-weight:900;
+  color:var(--g2);line-height:1;margin-bottom:10px;
+}
+.proof-label{font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.6}
+.proof-media{margin-top:72px;text-align:center}
+.proof-media-lead{
+  font-family:var(--en);font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.25);margin-bottom:28px;
+}
+.proof-media-list{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.proof-media-link{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  color:rgba(255,255,255,.5);font-size:.8rem;
+  padding:10px 22px;border-radius:4px;text-decoration:none;
+  transition:all .2s;
+}
+.proof-media-link:hover{background:rgba(255,255,255,.1);color:var(--white);border-color:rgba(255,255,255,.25)}
+
+/* ========== CONTACT ========== */
+#contact{background:var(--dark2)}
+.contact-layout{display:grid;grid-template-columns:1fr 1.5fr;gap:80px;align-items:start;margin-top:72px;}
+.contact-info-lead{font-family:var(--en);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:var(--white);line-height:1.2;margin-bottom:20px;letter-spacing:-.02em;}
+.contact-info-sub{font-size:.88rem;color:rgba(255,255,255,.5);line-height:1.9;margin-bottom:36px}
+.contact-detail{margin-bottom:32px}
+.contact-detail dt{font-family:var(--en);font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--g2);margin-bottom:4px;}
+.contact-detail dd{font-size:.9rem;color:rgba(255,255,255,.7);margin-bottom:20px}
+.contact-form{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--rad);padding:48px 44px;
+}
+.form-row{margin-bottom:20px}
+.form-row label{display:block;font-family:var(--en);font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:8px;}
+.form-row label span{color:var(--g2)}
+.form-row input,.form-row select,.form-row textarea{
+  width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-radius:8px;padding:13px 16px;
+  font-size:.88rem;font-family:var(--ja);color:var(--white);
+  transition:border-color .2s,box-shadow .2s;outline:none;
+}
+.form-row input::placeholder,.form-row textarea::placeholder{color:rgba(255,255,255,.25)}
+.form-row input:focus,.form-row select:focus,.form-row textarea:focus{
+  border-color:var(--g);
+  box-shadow:0 0 0 3px rgba(34,197,94,.12);
+}
+.form-row textarea{min-height:100px;resize:vertical}
+.form-row select{
+  appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath fill='%2322c55e' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+}
+.form-row select option{background:var(--dark2);color:var(--white)}
+.form-submit{
+  width:100%;background:var(--g);color:var(--white);border:none;
+  font-family:var(--en);font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:16px;border-radius:8px;cursor:pointer;
+  transition:background .2s,transform .15s,box-shadow .2s;
+}
+.form-submit:hover{background:#0f6632;transform:translateY(-1px);box-shadow:0 8px 24px rgba(21,128,61,.3)}
+.form-note{font-size:.72rem;color:rgba(255,255,255,.25);text-align:center;margin-top:14px;line-height:1.6}
+
+/* ========== COMING SOON ========== */
+#next{background:var(--dark3);overflow:hidden;position:relative}
+#next::before{
+  content:'NEXT';position:absolute;right:-60px;top:50%;transform:translateY(-50%);
+  font-family:var(--en);font-size:22vw;font-weight:900;color:rgba(255,255,255,.02);
+  pointer-events:none;line-height:1;letter-spacing:-.05em;
+}
+.next-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:64px;}
+.next-card{
+  border:1px solid rgba(255,255,255,.1);border-radius:var(--rad);
+  padding:40px 32px;position:relative;overflow:hidden;
+  transition:border-color .35s,transform .45s cubic-bezier(.16,1,.3,1),background .3s;
+}
+.next-card:hover{
+  border-color:var(--g);
+  transform:translateY(-6px);
+  background:rgba(21,128,61,.05);
+}
+.next-card-badge{
+  display:inline-block;background:rgba(197,160,40,.2);border:1px solid var(--gold);
+  color:var(--gold2);font-family:var(--en);font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:4px 12px;border-radius:2px;margin-bottom:16px;
+}
+.next-card-title{font-family:var(--en);font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:8px}
+.next-card-desc{font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.7}
+
+/* ========== FOOTER ========== */
+footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding:72px 5% 40px}
+.footer-inner{max-width:var(--max);margin:0 auto}
+.footer-top{
+  display:grid;grid-template-columns:2.2fr 1fr 1fr;gap:72px;
+  padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:40px;
+}
+.footer-logo-wrap{margin-bottom:20px}
+.footer-logo-wrap img{height:40px;filter:invert(1);opacity:.6}
+.footer-desc{font-size:.82rem;color:rgba(255,255,255,.35);line-height:1.9;max-width:300px}
+.footer-col h4{font-family:var(--en);font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:20px;}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:10px}
+.footer-col ul li a{font-size:.8rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
+.footer-col ul li a:hover{color:var(--white)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:.72rem;color:rgba(255,255,255,.2)}
+
+/* ========== SCROLL REVEAL (enhanced) ========== */
+.rv{
+  opacity:0;transform:translateY(40px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);
+}
+.rv.in{opacity:1;transform:none}
+.rvl{
+  opacity:0;transform:translateX(-40px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);
+}
+.rvl.in{opacity:1;transform:none}
+.rvr{
+  opacity:0;transform:translateX(40px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);
+}
+.rvr.in{opacity:1;transform:none}
+.rv2{
+  opacity:0;transform:translateY(30px);
+  transition:opacity .9s .18s cubic-bezier(.16,1,.3,1),transform .9s .18s cubic-bezier(.16,1,.3,1);
+}
+.rv2.in{opacity:1;transform:none}
+.rv3{
+  opacity:0;transform:translateY(30px);
+  transition:opacity .9s .34s cubic-bezier(.16,1,.3,1),transform .9s .34s cubic-bezier(.16,1,.3,1);
+}
+.rv3.in{opacity:1;transform:none}
+/* scale variant for cards */
+.rv-s{
+  opacity:0;transform:scale(.94) translateY(24px);
+  transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);
+}
+.rv-s.in{opacity:1;transform:none}
+.rv-s2{
+  opacity:0;transform:scale(.94) translateY(24px);
+  transition:opacity .85s .14s cubic-bezier(.16,1,.3,1),transform .85s .14s cubic-bezier(.16,1,.3,1);
+}
+.rv-s2.in{opacity:1;transform:none}
+.rv-s3{
+  opacity:0;transform:scale(.94) translateY(24px);
+  transition:opacity .85s .28s cubic-bezier(.16,1,.3,1),transform .85s .28s cubic-bezier(.16,1,.3,1);
+}
+.rv-s3.in{opacity:1;transform:none}
+
+/* glow flash on count finish */
+@keyframes numFlash{
+  0%{color:var(--g2)}
+  50%{color:#fff;text-shadow:0 0 20px rgba(34,197,94,.8)}
+  100%{color:var(--g2)}
+}
+.count-done{animation:numFlash .6s ease}
+
+/* ========== RESPONSIVE ========== */
+@media(max-width:1024px){
+  .about-grid,.case-wrap,.contact-layout{grid-template-columns:1fr}
+  .services-intro{grid-template-columns:1fr}
+  .service-cards{grid-template-columns:1fr;gap:12px}
+  .service-card{height:380px}
+  .plans-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto}
+  .plans-intro{flex-direction:column;align-items:flex-start}
+  .proof-grid{grid-template-columns:1fr 1fr}
+  .footer-top{grid-template-columns:1fr;gap:40px}
+  .case-wrap{display:block}
+  .case-img{aspect-ratio:16/9}
+  .case-img::after{background:linear-gradient(to bottom,transparent 50%,var(--dark2))}
+  nav{display:none}
+  .hd-menu{display:flex}
+  .gallery-grid{grid-template-columns:1fr 1fr;height:auto;grid-template-rows:240px 240px}
+  .next-grid{grid-template-columns:1fr}
+  .benefit-lead-block{grid-template-columns:1fr;gap:36px}
+  .benefit-cards{grid-template-columns:1fr}
+  .benefit-proof{grid-template-columns:1fr}
+  .benefit-proof-img{width:100%}
+  .ca-grid{grid-template-columns:1fr;gap:48px}
+  .case-results-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .sec{padding:80px 5%}
+  .gallery-grid{grid-template-columns:1fr;height:auto;grid-template-rows:220px 220px 220px}
+  .proof-grid{grid-template-columns:1fr 1fr}
+  .contact-form{padding:28px 20px}
+  .hero-logo img{height:54px}
+}
+</style>
+</head>
+<body>
+
+<!-- cursor glow -->
+<div id="cursor-glow"></div>
+
+<!-- HEADER -->
+<header id="hd">
+  <a class="hd-logo" href="#">
+    <img src="./breakone_mark_logo.png" alt="BreakOne"
+         onerror="this.src='./Break1logo1.jpg'">
+  </a>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#case">Case</a>
+    <a href="#plans">Sponsor</a>
+    <a href="#contact-about" class="nav-cta">Contact</a>
+  </nav>
+  <div class="hd-menu" id="menuBtn" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+<div id="mob-nav">
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#case" onclick="closeMenu()">Case Study</a>
+  <a href="#plans" onclick="closeMenu()">Sponsor Plans</a>
+  <a href="#contact-about" onclick="closeMenu()">About / Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-watermark" aria-hidden="true">
+    <img src="./breakone_mark_logo.png" alt="">
+  </div>
+  <div class="hero-inner">
+    <h1 class="hero-en">
+      <span id="h1a">JUNIOR</span>
+      <span id="h1b">ATHLETES</span>
+      <span id="h1c" style="color:var(--g2)">FIRST.</span>
+    </h1>
+    <p class="hero-ja" id="heroja">
+      ジュニアアスリートの可能性を、企業の力で広げる。<br>
+      株式会社ブレイクワンは、ジュニアスポーツ支援・SNS事業・コンサル事業の<br>
+      3軸で、次世代の挑戦を支える新しいサポートモデルをつくります。
+    </p>
+    <div class="hero-btns" id="herobtns">
+      <a href="#services" class="btn-fill">事業内容を見る</a>
+      <a href="#contact-about" class="btn-line">お問い合わせ</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-band">
+  <div class="marquee-inner">
+    <span>Junior Sports Support</span><span class="sep">—</span>
+    <span>SNS Strategy</span><span class="sep">—</span>
+    <span>Business Consulting</span><span class="sep">—</span>
+    <span>BreakOne Inc.</span><span class="sep">—</span>
+    <span>Junior Sports Support</span><span class="sep">—</span>
+    <span>SNS Strategy</span><span class="sep">—</span>
+    <span>Business Consulting</span><span class="sep">—</span>
+    <span>BreakOne Inc.</span><span class="sep">—</span>
+    <span>Junior Sports Support</span><span class="sep">—</span>
+    <span>SNS Strategy</span><span class="sep">—</span>
+    <span>Business Consulting</span><span class="sep">—</span>
+    <span>BreakOne Inc.</span><span class="sep">—</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="sec sec-dark">
+  <div class="sec-inner">
+    <div class="services-intro">
+      <div>
+        <p class="sec-label rv">Our Services</p>
+        <h2 class="sec-title rv">3つの事業で、<br>可能性を広げる。</h2>
+      </div>
+      <p class="sec-desc rv2">ジュニアスポーツ支援・SNS事業・コンサル事業。それぞれが独立しながらも連携し、クライアントに新しい価値を届けます。</p>
+    </div>
+  </div>
+  <div class="service-cards">
+    <div class="service-card rv-s">
+      <div class="service-card-bg" style="background-image:url('./sisters_court.jpg');background-position:center 40%"></div>
+      <div class="service-card-body">
+        <div class="service-card-num">01</div>
+        <span class="service-card-icon">🎾</span>
+        <div class="service-card-en">Junior Sports</div>
+        <div class="service-card-ja">ジュニアスポーツ支援事業</div>
+        <div class="service-card-desc">ジュニアアスリートが経済的な理由で夢を諦めないよう、スポンサー獲得・ファンコミュニティ構築・SNSを活用したマネタイズを支援します。</div>
+        <a href="#plans" class="service-card-more">Sponsor Plans →</a>
+      </div>
+    </div>
+    <div class="service-card rv-s2">
+      <div class="service-card-bg" style="background-image:url('./sae_court.jpg');background-position:center 35%"></div>
+      <div class="service-card-body">
+        <div class="service-card-num">02</div>
+        <span class="service-card-icon">📱</span>
+        <div class="service-card-en">SNS Strategy</div>
+        <div class="service-card-ja">SNS事業</div>
+        <div class="service-card-desc">YouTube・TikTok・Instagram・小红书など各プラットフォームに最適化した縦型ショート動画を軸に、コンテンツ企画から分析まで一貫して提供します。</div>
+        <a href="#contact-about" class="service-card-more">Inquire →</a>
+      </div>
+    </div>
+    <div class="service-card rv-s3">
+      <div class="service-card-bg" style="background-image:url('./tennis_play.jpg');background-position:center 30%"></div>
+      <div class="service-card-body">
+        <div class="service-card-num">03</div>
+        <span class="service-card-icon">📈</span>
+        <div class="service-card-en">Consulting</div>
+        <div class="service-card-ja">コンサル事業</div>
+        <div class="service-card-desc">経営・経営企画・新規事業立案・営業・マーケティング・人事労務まで、実務経験を基に中小企業の成長を支援します。</div>
+        <a href="#contact-about" class="service-card-more">Inquire →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY -->
+<div id="gallery">
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="./hero2.jpeg" alt="試合の様子" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="./hero4.jpeg" alt="試合の様子" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="./hero3.jpeg" alt="サーブ" loading="lazy">
+    </div>
+  </div>
+</div>
+
+<!-- CASE STUDY -->
+<section id="case" class="sec sec-light">
+  <div class="sec-inner">
+    <p class="sec-label rv">Case Study</p>
+    <h2 class="sec-title rv">才能と仕組みで、<br>夢を叶える。</h2>
+
+    <div class="case-wrap rv">
+      <div class="case-img">
+        <img src="./gold_medal.jpg" alt="金メダル" loading="lazy">
+        <div class="case-tag-wrap">
+          <span class="tag">Tennis</span>
+          <span class="tag" style="background:var(--gold);color:var(--dark)">全国優勝</span>
+        </div>
+      </div>
+      <div class="case-content">
+        <p class="case-content-label">Case 01 — Junior Athlete Support</p>
+        <div class="case-name" style="font-size:clamp(1.4rem,3vw,2rem);line-height:1.2">次女は遠征費を<br>集めたい</div>
+        <div class="case-name-ja" style="margin-bottom:12px">新地 恵芽（テニス）</div>
+        <a href="https://lit.link/2ndtennisplayer" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-bottom:20px;font-family:var(--en);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--g2);text-decoration:none;border:1px solid rgba(34,197,94,.3);padding:6px 14px;border-radius:4px;transition:background .2s" onmouseover="this.style.background='rgba(34,197,94,.1)'" onmouseout="this.style.background='transparent'">🔗 lit.link/2ndtennisplayer</a>
+        <div class="case-desc">
+          全国中学生テニス選手権 女子ダブルス優勝。BreakOneとともにSNSブランディングと協賛獲得に取り組み、クラウドファンディングでは目標の153%・支援総額114万円超を達成。ケニアへの海外遠征を実現しました。
+        </div>
+        <p class="case-quote">「支援をお願いするのではなく、応援したくなる価値を提供する。その姿勢が、スポンサーを自然に集める仕組みにつながっています。」</p>
+      </div>
+    </div>
+
+    <!-- SNS 影響力 -->
+    <div class="case-sns rv">
+      <p class="case-sns-label">SNS Reach — プラットフォーム別再生実績</p>
+      <div class="case-sns-grid">
+        <div class="case-sns-item">
+          <div class="case-sns-platform yt">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+            YouTube
+          </div>
+          <div class="case-sns-views" data-sns-count="2472" data-sns-suffix="万回">2,472<span class="unit">万回</span></div>
+          <div class="case-sns-sub">@junior.tennis<br>登録者 6,110人 · 347本</div>
+        </div>
+        <div class="case-sns-item">
+          <div class="case-sns-platform ig">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            Instagram
+          </div>
+          <div class="case-sns-views" data-sns-count="3898" data-sns-suffix="万回">3,898<span class="unit">万回</span></div>
+          <div class="case-sns-sub">@2ndtenniseme<br>フォロワー 6,012人 · リール44本</div>
+        </div>
+        <div class="case-sns-item">
+          <div class="case-sns-platform tt">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34l.04-8.65a8.26 8.26 0 0 0 4.83 1.55V4.77a4.85 4.85 0 0 1-1.1-.08z"/></svg>
+            TikTok
+          </div>
+          <div class="case-sns-views" data-sns-count="230" data-sns-suffix="万回〜">230<span class="unit">万回〜</span></div>
+          <div class="case-sns-sub">@2ndtennisplayer<br>フォロワー 1,308人</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 実績 -->
+    <div class="case-results rv">
+      <p class="case-results-label">Results</p>
+      <div class="case-results-grid">
+        <div class="case-result-item">
+          <div class="case-result-num" data-count="7800">0</div>
+          <div class="case-result-detail">SNS 総再生数（万回）<br><span>8プラットフォーム合計（2026年10月時点）</span></div>
+        </div>
+        <div class="case-result-item">
+          <div class="case-result-num">114万円</div>
+          <div class="case-result-detail">CAMPFIRE 支援総額<br><span>目標749,300円 → 153%達成 / 支援者36名</span></div>
+        </div>
+        <div class="case-result-item">
+          <div class="case-result-num">全国1位</div>
+          <div class="case-result-detail">全国中学生テニス選手権<br><span>女子ダブルス 2026年</span></div>
+        </div>
+        <div class="case-result-item">
+          <div class="case-result-num">2件</div>
+          <div class="case-result-detail">メディア掲載<br><span>全国紙・地域メディア</span></div>
+        </div>
+      </div>
+      <div class="case-media">
+        <p class="case-media-label">Media Coverage</p>
+        <div class="case-media-list">
+          <a href="https://resuka.co.jp/sportskids/2026/09/7938/" target="_blank" class="case-media-link">朝日れすかPLUS — スポーツキッズ</a>
+          <a href="https://kashiwa.goguynet.jp/2026/09/15/zenkokucyugakuseitennissemsyukentaikai53doubles/" target="_blank" class="case-media-link">号外NET 柏市</a>
+          <a href="https://camp-fire.jp/projects/911516/view" target="_blank" class="case-media-link">CAMPFIRE — 153%達成</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPONSOR BENEFIT -->
+<section id="benefit" class="sec">
+  <div class="sec-inner">
+    <p class="sec-label rv">Sponsor Benefit</p>
+
+    <div class="benefit-lead-block rv">
+      <div>
+        <h2 class="benefit-lead-title">
+          <em>Why Sponsor</em>
+          ユニフォームより、<br>動画で届ける。
+        </h2>
+      </div>
+      <div class="benefit-lead-right">
+        <div class="benefit-lead-point">
+          <div class="benefit-lead-point-icon">📹</div>
+          <div class="benefit-lead-point-body">
+            <div class="benefit-lead-point-title">ユニフォームのロゴは、会場にいる人にしか届かない</div>
+            <div class="benefit-lead-point-desc">動画内に掲載されたロゴは、YouTube・TikTok・Instagramで何万回も再生されます。会場の観客数とは比べものにならない露出が、継続的に積み上がります。</div>
+          </div>
+        </div>
+        <div class="benefit-lead-point">
+          <div class="benefit-lead-point-icon">🤝</div>
+          <div class="benefit-lead-point-body">
+            <div class="benefit-lead-point-title">ファンが多いほど、企業への好感度が上がる</div>
+            <div class="benefit-lead-point-desc">BreakOneのアスリートには、熱量の高いファンや応援者がいます。「応援している企業」として認知されることで、自然に企業イメージが向上します。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="benefit-cards">
+      <div class="benefit-card rv-s">
+        <div class="benefit-card-bg" style="background-image:url('./kanto_view.jpg');background-position:center 40%"></div>
+        <div class="benefit-card-body">
+          <div class="benefit-card-en">YouTube / Shorts / Reels</div>
+          <div class="benefit-card-title">動画内ロゴ掲載</div>
+          <div class="benefit-card-desc">試合・遠征・練習動画にスペシャルスポンサーとして企業名・ロゴが表示されます。</div>
+        </div>
+      </div>
+      <div class="benefit-card rv-s2">
+        <div class="benefit-card-bg" style="background-image:url('./festival.jpg');background-position:center 25%"></div>
+        <div class="benefit-card-body">
+          <div class="benefit-card-en">Instagram / TikTok / X</div>
+          <div class="benefit-card-title">SNS投稿・タグ付け</div>
+          <div class="benefit-card-desc">活動報告の投稿に企業名を掲載・タグ付け。ファンへの自然な訴求と波及効果が期待できます。</div>
+        </div>
+      </div>
+      <div class="benefit-card rv-s3">
+        <div class="benefit-card-bg" style="background-image:url('./kenya.jpg');background-position:center 30%"></div>
+        <div class="benefit-card-body">
+          <div class="benefit-card-en">Expedition / Tournament</div>
+          <div class="benefit-card-title">遠征・大会レポート</div>
+          <div class="benefit-card-desc">海外遠征・全国大会の活動レポートに協賛企業として明記。強固な信頼につながります。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="benefit-proof rv">
+      <div class="benefit-proof-img">
+        <img src="./sponsor_example_youtube.png" alt="スポンサーロゴ掲載の実例">
+      </div>
+      <div class="benefit-proof-copy">
+        <span class="benefit-proof-badge">Actual Example</span>
+        <div class="benefit-proof-title">実際のYouTube動画でスペシャルスポンサーとして<br>企業ロゴが掲載された事例です。</div>
+        <div class="benefit-proof-desc">選手が撮影・投稿した動画のサムネイルに企業名・ロゴが大きく表示されます。視聴者全員の目に届き、「応援している企業」として好意的に受け取られます。</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PLANS -->
+<section id="plans" class="sec sec-dark">
+  <div class="sec-inner">
+    <div class="plans-intro">
+      <div>
+        <p class="sec-label rv">Sponsor Plans</p>
+        <h2 class="sec-title rv">ジュニアアスリート<br>協賛プラン</h2>
+      </div>
+      <p class="sec-desc rv2">企業規模を問わず参加できる協賛プランを用意しています。単発・地域限定など柔軟にご対応します。</p>
+    </div>
+    <div class="plans-grid">
+      <div class="plan rv-s">
+        <p class="plan-label">Plan 01</p>
+        <div class="plan-name">Standard</div>
+        <div class="plan-name-ja">スタンダードプラン</div>
+        <div class="plan-price">¥300,000</div>
+        <div class="plan-price-note">年間（税別）</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-list">
+          <li>HP・協賛企業ページへの掲載</li>
+          <li>SNSへの会社名掲載（月1回）</li>
+          <li>活動報告書の送付（年2回）</li>
+          <li>全国大会・遠征時の協賛表記</li>
+        </ul>
+        <a href="#contact-about" class="plan-btn">お問い合わせ</a>
+      </div>
+      <div class="plan featured rv-s2">
+        <p class="plan-label">Plan 02</p>
+        <div class="plan-name">Premium</div>
+        <div class="plan-name-ja">プレミアムプラン</div>
+        <div class="plan-price">¥1,200,000</div>
+        <div class="plan-price-note">年間（税別）</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-list">
+          <li>スタンダードの全特典</li>
+          <li>動画・リール内へのロゴ掲載</li>
+          <li>遠征・活動報告（詳細版）</li>
+          <li>共同プレスリリースの発信</li>
+          <li>選手からの直接メッセージ動画</li>
+          <li>オフィシャルパートナー表記</li>
+        </ul>
+        <a href="#contact-about" class="plan-btn">お問い合わせ</a>
+      </div>
+      <div class="plan rv-s3">
+        <p class="plan-label">Plan 03</p>
+        <div class="plan-name">Custom</div>
+        <div class="plan-name-ja">カスタムプラン</div>
+        <div class="plan-price" style="font-size:1.8rem">要相談</div>
+        <div class="plan-price-note">ご要望に合わせて設計</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-list">
+          <li>プレミアムの全特典</li>
+          <li>イベント・御社SNSへのゲスト出演</li>
+          <li>共同マーケティング企画</li>
+          <li>専任担当による個別対応</li>
+        </ul>
+        <a href="#contact-about" class="plan-btn">詳細を相談する</a>
+      </div>
+    </div>
+    <p class="plans-note rv">
+      ※ 単発の試合協賛・地域限定プランも対応可能です。<br>
+      領収書・請求書は株式会社ブレイクワンとして正式発行します。
+    </p>
+  </div>
+</section>
+
+<!-- NEXT -->
+<section id="next" class="sec sec-dark">
+  <div class="sec-inner">
+    <p class="sec-label rv">What's Next</p>
+    <h2 class="sec-title rv">才能を、ファンと企業が支える時代へ。<br>ジュニアスポーツの新しいマーケティング。</h2>
+    <p class="sec-desc rv2" style="max-width:640px;margin-bottom:72px">
+      テニスで証明したモデルを、もっと多くのアスリートへ。もっと多くのスポーツへ。<br>
+      2027年以降、支援できるアスリートの数を本格的に広げていきます。
+    </p>
+    <div class="next-grid">
+      <div class="next-card rv-s">
+        <div class="next-card-badge">2027 Coming Soon</div>
+        <div class="next-card-title">アスリート募集開始</div>
+        <div class="next-card-desc">テニス以外の競技も対象に、ジュニアアスリート支援プログラムの参加募集を開始。才能があるのに資金で止まる選手をゼロにしていきます。</div>
+      </div>
+      <div class="next-card rv-s2">
+        <div class="next-card-badge">Expanding</div>
+        <div class="next-card-title">マルチスポーツへ</div>
+        <div class="next-card-desc">テニスで確立したスポンサー獲得・SNSブランディングのモデルを、サッカー・水泳・陸上など他競技へ水平展開。対応スポーツを順次拡大します。</div>
+      </div>
+      <div class="next-card rv-s3">
+        <div class="next-card-badge">Growing</div>
+        <div class="next-card-title">スポンサー企業の拡大</div>
+        <div class="next-card-desc">協賛してくださる企業が増えることで、支援できるアスリートの数が増えます。まず1社の「応援」が、次の才能を生む仕組みです。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT + ABOUT -->
+<section id="contact-about" class="sec" style="background:var(--dark);border-top:1px solid rgba(255,255,255,.07)">
+  <div class="sec-inner">
+    <div class="ca-grid">
+      <div class="ca-left rvl">
+        <div class="ca-logo-block">
+          <img src="./breakone_mark_logo.png" alt="BreakOne" onerror="this.src='./Break1logo1.jpg'">
+        </div>
+        <h2 class="ca-name-en">Masashi Shinchi</h2>
+        <p class="ca-name-ja">新地 将史</p>
+        <p class="ca-role">Founder &amp; CEO — 株式会社ブレイクワン</p>
+        <blockquote class="ca-message">
+          どの業界でも共通するのは、「人を大切にする経営」の重要性です。<br>
+          ブレイクワンは、才能ある若者が経済的な理由で夢を諦めない社会をつくるために立ち上げた会社です。企業の力と、SNSの力を組み合わせることで、これまで誰もつくれなかった支援モデルを実現します。
+        </blockquote>
+        <div class="ca-career">
+          <div class="ca-career-item">
+            <div class="ca-career-dot"></div>
+            <div class="ca-career-text"><strong>上場企業 ニュービジネス本部長</strong>として10を超える新規事業を統括</div>
+          </div>
+          <div class="ca-career-item">
+            <div class="ca-career-dot"></div>
+            <div class="ca-career-text"><strong>経営・経営企画・新規事業立案・営業・マーケティング・人事労務</strong>に精通</div>
+          </div>
+          <div class="ca-career-item">
+            <div class="ca-career-dot"></div>
+            <div class="ca-career-text"><strong>ジュニアスポーツ支援・SNS事業・コンサル事業</strong>の3軸で株式会社ブレイクワンを設立</div>
+          </div>
+        </div>
+        <div class="ca-company-details">
+          <div class="ca-detail-row">
+            <span class="ca-detail-label">Company</span>
+            <span class="ca-detail-value">株式会社ブレイクワン（BreakOne Inc.）</span>
+          </div>
+          <div class="ca-detail-row">
+            <span class="ca-detail-label">Email</span>
+            <span class="ca-detail-value"><a href="mailto:m.shinchi@break-1.com" style="color:var(--g2);text-decoration:none;font-weight:700">m.shinchi@break-1.com</a></span>
+          </div>
+          <div class="ca-detail-row">
+            <span class="ca-detail-label">Business</span>
+            <span class="ca-detail-value">ジュニアスポーツ支援 / SNS事業 / コンサル事業</span>
+          </div>
+        </div>
+        <a href="mailto:m.shinchi@break-1.com" class="ca-mail-btn">
+          お問い合わせはこちら →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo-wrap">
+          <img src="./breakone_text_logo.png" alt="BreakOne" onerror="this.src='./Break1logo1.jpg'">
+        </div>
+        <p class="footer-desc">ジュニアアスリートの可能性を、企業の力で広げる。ジュニアスポーツ支援・SNS事業・コンサル事業の3軸で展開する会社です。</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Junior Sports</a></li>
+          <li><a href="#services">SNS Strategy</a></li>
+          <li><a href="#services">Consulting</a></li>
+          <li><a href="#plans">Sponsor Plans</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#case">Case Study</a></li>
+          <li><a href="#contact-about">About / Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 株式会社ブレイクワン（BreakOne Inc.）All rights reserved.</p>
+      <p class="footer-copy">m.shinchi@break-1.com</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ===================================================
+   HEADER SCROLL
+=================================================== */
+const hd = document.getElementById('hd');
+window.addEventListener('scroll', () => {
+  hd.classList.toggle('scrolled', scrollY > 60);
+  parallaxHero();
+}, {passive:true});
+
+/* ===================================================
+   MOBILE MENU
+=================================================== */
+function toggleMenu(){ document.getElementById('mob-nav').classList.toggle('open'); }
+function closeMenu(){ document.getElementById('mob-nav').classList.remove('open'); }
+
+/* ===================================================
+   HERO ENTRANCE
+=================================================== */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    ['h1a','h1b','h1c'].forEach((id, i) => {
+      setTimeout(() => document.getElementById(id).classList.add('in'), i * 200);
+    });
+  }, 80);
+  setTimeout(() => document.getElementById('heroja').classList.add('in'), 700);
+  setTimeout(() => document.getElementById('herobtns').classList.add('in'), 920);
+});
+
+/* ===================================================
+   HERO PARALLAX
+=================================================== */
+const heroBg = document.getElementById('heroBg');
+function parallaxHero() {
+  if (scrollY < window.innerHeight * 1.2) {
+    heroBg.style.transform = `translateY(${scrollY * 0.38}px) scale(1.06)`;
+  }
+}
+
+/* ===================================================
+   CURSOR GLOW
+=================================================== */
+const glow = document.getElementById('cursor-glow');
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top  = e.clientY + 'px';
+}, {passive:true});
+
+/* ===================================================
+   SCROLL REVEAL
+=================================================== */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, {threshold: 0.08, rootMargin: '0px 0px -32px 0px'});
+document.querySelectorAll('.rv,.rvl,.rvr,.rv2,.rv3,.rv-s,.rv-s2,.rv-s3').forEach(el => revealObs.observe(el));
+
+/* ===================================================
+   COUNT-UP  (ease-out cubic, fires on scroll-enter)
+=================================================== */
+function animateCount(el, target, duration, suffix) {
+  const start = performance.now();
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+  function update(now) {
+    const t = Math.min((now - start) / duration, 1);
+    const val = Math.round(easeOut(t) * target);
+    el.textContent = val.toLocaleString() + suffix;
+    if (t < 1) {
+      requestAnimationFrame(update);
+    } else {
+      el.classList.add('count-done');
+      setTimeout(() => el.classList.remove('count-done'), 700);
+    }
+  }
+  requestAnimationFrame(update);
+}
+
+// Results section counters (e.g. 7800万)
+const countObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = parseInt(el.dataset.count);
+    if (isNaN(target)) return;
+    animateCount(el, target, 2200, '万');
+    countObs.unobserve(el);
+  });
+}, {threshold: 0.5});
+document.querySelectorAll('[data-count]').forEach(el => countObs.observe(el));
+
+// SNS section counters (bigger numbers, slower)
+const snsObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = parseInt(el.dataset.snsCount);
+    if (isNaN(target)) return;
+    const suffix = el.dataset.snsSuffix || '';
+    const unitEl = el.querySelector('.unit');
+    const unitText = unitEl ? unitEl.outerHTML : '';
+    const duration = target > 1000 ? 2600 : 1800;
+
+    const start = performance.now();
+    const easeOut = t => 1 - Math.pow(1 - t, 3);
+    function update(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const val = Math.round(easeOut(t) * target);
+      el.innerHTML = val.toLocaleString() + unitText;
+      if (t < 1) {
+        requestAnimationFrame(update);
+      } else {
+        el.classList.add('count-done');
+        setTimeout(() => el.classList.remove('count-done'), 700);
+      }
+    }
+    requestAnimationFrame(update);
+    snsObs.unobserve(el);
+  });
+}, {threshold: 0.6});
+document.querySelectorAll('[data-sns-count]').forEach(el => snsObs.observe(el));
+
+/* ===================================================
+   CANVAS PARTICLE SYSTEM (Hero)
+=================================================== */
+(function() {
+  const canvas = document.getElementById('heroCanvas');
+  const ctx = canvas.getContext('2d');
+  const PARTICLE_COUNT = 55;
+  const LINE_DIST = 130;
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  class Particle {
+    constructor() { this.init(); }
+    init() {
+      this.x  = Math.random() * W;
+      this.y  = Math.random() * H;
+      this.vx = (Math.random() - 0.5) * 0.35;
+      this.vy = (Math.random() - 0.5) * 0.35;
+      this.r  = Math.random() * 1.6 + 0.5;
+      this.a  = Math.random() * 0.35 + 0.08;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > W) this.vx *= -1;
+      if (this.y < 0 || this.y > H) this.vy *= -1;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(34,197,94,${this.a})`;
+      ctx.fill();
+    }
+  }
+
+  function init() {
+    particles = [];
+    for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+  }
+
+  function drawLines() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < LINE_DIST) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(34,197,94,${0.07 * (1 - d / LINE_DIST)})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  let raf;
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    drawLines();
+    raf = requestAnimationFrame(loop);
+  }
+
+  // Only run while hero is visible
+  const heroEl = document.getElementById('hero');
+  const heroObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      if (!raf) loop();
+    } else {
+      cancelAnimationFrame(raf);
+      raf = null;
+    }
+  }, {threshold: 0});
+  heroObs.observe(heroEl);
+
+  window.addEventListener('resize', () => { resize(); init(); }, {passive:true});
+  resize();
+  init();
+  loop();
+})();
+</script>
+</body>
+</html>
