@@ -1018,10 +1018,10 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
       <img src="./hero2.jpeg" alt="試合の様子" loading="lazy" style="object-position:center 22%">
     </div>
     <div class="gallery-item">
-      <img src="./hero4.jpeg" alt="試合の様子" loading="lazy">
+      <img src="./hero4.jpeg" alt="試合の様子" loading="lazy" style="object-position:center 25%">
     </div>
     <div class="gallery-item">
-      <img src="./hero3.jpeg" alt="サーブ" loading="lazy">
+      <img src="./hero3.jpeg" alt="サーブ" loading="lazy" style="object-position:center 20%">
     </div>
   </div>
 </div>
@@ -1077,7 +1077,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
             <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34l.04-8.65a8.26 8.26 0 0 0 4.83 1.55V4.77a4.85 4.85 0 0 1-1.1-.08z"/></svg>
             TikTok
           </div>
-          <div class="case-sns-views" data-sns-count="230" data-sns-suffix="万回〜">230<span class="unit">万回〜</span></div>
+          <div class="case-sns-views" data-sns-count="230" data-sns-suffix="万回">230<span class="unit">万回</span></div>
           <div class="case-sns-sub">@2ndtennisplayer<br>フォロワー 1,308人</div>
         </div>
       </div>
@@ -1088,19 +1088,19 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding
       <p class="case-results-label">Results</p>
       <div class="case-results-grid">
         <div class="case-result-item">
-          <div class="case-result-num" data-count="7800">7,800</div>
+          <div class="case-result-num" data-count="7800" data-from="0" data-suffix="万">7,800万</div>
           <div class="case-result-detail">SNS 総再生数（万回）<br><span>8プラットフォーム合計（2026年10月時点）</span></div>
         </div>
         <div class="case-result-item">
-          <div class="case-result-num">114万円</div>
+          <div class="case-result-num" data-count="114" data-from="1" data-suffix="万円">114万円</div>
           <div class="case-result-detail">CAMPFIRE 支援総額<br><span>目標749,300円 → 153%達成 / 支援者36名</span></div>
         </div>
         <div class="case-result-item">
-          <div class="case-result-num">全国1位</div>
+          <div class="case-result-num" data-count="1" data-from="100" data-prefix="全国" data-suffix="位">全国1位</div>
           <div class="case-result-detail">全国中学生テニス選手権<br><span>女子ダブルス 2026年</span></div>
         </div>
         <div class="case-result-item">
-          <div class="case-result-num">2件</div>
+          <div class="case-result-num" data-count="2" data-mode="slot" data-suffix="件">2件</div>
           <div class="case-result-detail">メディア掲載<br><span>全国紙・地域メディア</span></div>
         </div>
       </div>
@@ -1463,14 +1463,51 @@ function animateCount(el, target, duration, suffix) {
   requestAnimationFrame(update);
 }
 
-// Results section counters (e.g. 7800万)
+// Results section counters
+// data-count=最終値 / data-from=開始値（大きければカウントダウン）/ data-mode="slot"=0〜9をスロット回転
+function countFlash(el){
+  el.classList.add('count-done');
+  setTimeout(() => el.classList.remove('count-done'), 700);
+}
+function animateRange(el, from, to, duration, prefix, suffix) {
+  const start = performance.now();
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+  function update(now) {
+    const t = Math.min((now - start) / duration, 1);
+    const val = Math.round(from + (to - from) * easeOut(t));
+    el.textContent = prefix + val.toLocaleString() + suffix;
+    if (t < 1) requestAnimationFrame(update); else countFlash(el);
+  }
+  requestAnimationFrame(update);
+}
+function animateSlot(el, target, prefix, suffix) {
+  let delay = 40, elapsed = 0;
+  function spin() {
+    elapsed += delay;
+    if (elapsed > 1800) {
+      el.textContent = prefix + target + suffix;
+      countFlash(el);
+      return;
+    }
+    el.textContent = prefix + Math.floor(Math.random() * 10) + suffix;
+    delay = Math.min(delay * 1.12, 220);   // だんだん遅くなって止まる
+    setTimeout(spin, delay);
+  }
+  spin();
+}
 const countObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (!e.isIntersecting) return;
-    const el = e.target;
-    const target = parseInt(el.dataset.count);
+    const el = e.target, d = el.dataset;
+    const target = parseInt(d.count);
     if (isNaN(target)) return;
-    animateCount(el, target, 2200, '万');
+    const prefix = d.prefix || '', suffix = d.suffix || '';
+    if (d.mode === 'slot') {
+      animateSlot(el, target, prefix, suffix);
+    } else {
+      const from = parseInt(d.from || '0');
+      animateRange(el, from, target, 2200, prefix, suffix);
+    }
     countObs.unobserve(el);
   });
 }, {threshold: 0.5});
